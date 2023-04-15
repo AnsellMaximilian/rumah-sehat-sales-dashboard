@@ -41,5 +41,8 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13"
   }
 }
