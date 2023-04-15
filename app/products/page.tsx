@@ -25,6 +25,10 @@ export default async function IndexPage({
     return [...prod, matchingSupplier ? matchingSupplier[1] : ''];
   });
 
+  const filteredProductsData = productsData.filter((prod) =>
+    prod[1].toLocaleLowerCase().includes(search.toLocaleLowerCase())
+  );
+
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <Title>Products</Title>
@@ -32,7 +36,7 @@ export default async function IndexPage({
       <Search />
       {productsData && (
         <Card className="mt-6">
-          <ProductsTable products={productsData} />
+          <ProductsTable products={filteredProductsData} />
         </Card>
       )}
     </main>
