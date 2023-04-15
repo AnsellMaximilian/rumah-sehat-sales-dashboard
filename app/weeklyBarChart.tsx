@@ -78,8 +78,6 @@ export default function WeeklyBarChart({
     return 0;
   });
 
-  console.log(chartData);
-
   return (
     <Card>
       <Title>Weekly Revenue</Title>
