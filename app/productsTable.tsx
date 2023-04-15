@@ -9,6 +9,7 @@ import {
   TableCell,
   Text
 } from '@tremor/react';
+import { rpFormatter } from '../helpers/formatter';
 
 export default function ProductsTable({ products }: { products: string[][] }) {
   return (
@@ -32,10 +33,10 @@ export default function ProductsTable({ products }: { products: string[][] }) {
               <Text>{product[5]}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product[2]}</Text>
+              <Text>{rpFormatter(parseFloat(product[2]))}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product[3]}</Text>
+              <Text>{rpFormatter(parseFloat(product[3]))}</Text>
             </TableCell>
           </TableRow>
         ))}
