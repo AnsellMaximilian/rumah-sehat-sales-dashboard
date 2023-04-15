@@ -3,17 +3,9 @@
 import { Card, Title, BarChart, Subtitle } from '@tremor/react';
 import { SaleData } from './actions/getSalesData';
 import moment from 'moment';
+import { rpFormatter } from '../helpers/formatter';
 
-const dataFormatter = (number: number) => {
-  return Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    currencySign: 'accounting',
-    minimumFractionDigits: 0
-  })
-    .format(number)
-    .toString();
-};
+const dataFormatter = rpFormatter;
 
 export default function WeeklyBarChart({
   salesData
