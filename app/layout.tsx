@@ -5,9 +5,8 @@ import AnalyticsWrapper from './analytics';
 import { Suspense } from 'react';
 
 export const metadata = {
-  title: 'Next.js 13 + PlanetScale + NextAuth + Tailwind CSS',
-  description:
-    'A user admin dashboard configured with Next.js, PlanetScale, NextAuth, Tailwind CSS, TypeScript, ESLint, and Prettier.'
+  title: 'Rumah Sehat Dashboard',
+  description: "Dashboard of Rumah Sehat's Sales Data"
 };
 
 export default async function RootLayout({
