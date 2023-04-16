@@ -54,14 +54,14 @@ export default function SalesTotal({
         <Card className="h-full">
           <Title>Revenue</Title>
           <Subtitle>Year to Date</Subtitle>
-          <Bold style={{ fontSize: 24 }}>{rpFormatter(salesTotal)}</Bold>
+          <Metric>{rpFormatter(salesTotal)}</Metric>
         </Card>
       </Col>
       <Col numColSpan={12}>
         <Card className="h-full">
           <Title>Revenue</Title>
           <Subtitle>This Week</Subtitle>
-          <Bold style={{ fontSize: 24 }}>{rpFormatter(weeklyTotal)}</Bold>
+          <Metric>{rpFormatter(weeklyTotal)}</Metric>
         </Card>
       </Col>
     </Grid>
