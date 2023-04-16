@@ -8,7 +8,8 @@ import {
   Grid,
   Col,
   Bold,
-  Italic
+  Italic,
+  Text
 } from '@tremor/react';
 import { SaleData } from './actions/getSalesData';
 import moment from 'moment';
@@ -59,14 +60,14 @@ export default function ProfitsTotal({
       <Col numColSpan={12}>
         <Card className="h-full">
           <Title>Profits</Title>
-          <Subtitle>Year to Date</Subtitle>
+          <Text>Year to Date</Text>
           <Metric>{rpFormatter(profitsTotal)}</Metric>
         </Card>
       </Col>
       <Col numColSpan={12}>
         <Card className="h-full">
           <Title>Profits</Title>
-          <Subtitle>This Week</Subtitle>
+          <Text>This Week</Text>
           <Metric>{rpFormatter(weeklyTotal)}</Metric>
         </Card>
       </Col>

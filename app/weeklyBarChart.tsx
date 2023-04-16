@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Title, BarChart, Subtitle } from '@tremor/react';
+import { Card, Title, BarChart, Subtitle, Text } from '@tremor/react';
 import { SaleData } from './actions/getSalesData';
 import moment from 'moment';
 import { rpFormatter } from '../helpers/formatter';
@@ -73,9 +73,7 @@ export default function WeeklyBarChart({
   return (
     <Card>
       <Title>Weekly Revenue</Title>
-      <Subtitle>
-        2023&apos;s weekly revenue (data from 13th of February).
-      </Subtitle>
+      <Text>2023&apos;s weekly revenue (data from 13th of February).</Text>
       <BarChart
         className="mt-6"
         data={chartData}
