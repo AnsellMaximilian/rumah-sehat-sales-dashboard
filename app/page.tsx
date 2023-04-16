@@ -6,6 +6,8 @@ import UsersTable from './table';
 import getSalesData from './actions/getSalesData';
 import WeeklyBarChart from './weeklyBarChart';
 import SalesTotal from './salesTotal';
+import PerformanceChart from './profitsAreaChart';
+import ProfitsTotal from './profitsTotal';
 
 export const dynamic = 'force-dynamic',
   revalidate = 1800;
@@ -32,6 +34,13 @@ export default async function IndexPage({
         </Col>
         <Col numColSpan={12} numColSpanMd={4}>
           {sales && <SalesTotal salesData={sales} />}
+        </Col>
+
+        <Col numColSpan={12} numColSpanMd={4}>
+          {sales && <ProfitsTotal salesData={sales} />}
+        </Col>
+        <Col numColSpan={12} numColSpanMd={8}>
+          {sales && <PerformanceChart salesData={sales} />}
         </Col>
       </Grid>
     </main>
