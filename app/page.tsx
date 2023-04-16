@@ -1,4 +1,4 @@
-import { Card, Title, Text } from '@tremor/react';
+import { Card, Title, Text, Grid, Col } from '@tremor/react';
 import { queryBuilder } from '../lib/planetscale';
 
 import Search from './search';
@@ -26,14 +26,14 @@ export default async function IndexPage({
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12 md:col-span-8">
+      <Grid className="gap-6" numColsSm={12}>
+        <Col numColSpan={12} numColSpanMd={8}>
           {sales && <WeeklyBarChart salesData={sales} />}
-        </div>
-        <div className="col-span-12 md:col-span-4">
+        </Col>
+        <Col numColSpan={12} numColSpanMd={4}>
           {sales && <SalesTotal salesData={sales} />}
-        </div>
-      </div>
+        </Col>
+      </Grid>
     </main>
   );
 }

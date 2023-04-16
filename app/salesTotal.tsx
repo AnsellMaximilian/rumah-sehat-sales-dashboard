@@ -5,7 +5,8 @@ import {
   Title,
   Subtitle,
   Metric,
-  Text,
+  Grid,
+  Col,
   Bold,
   Italic
 } from '@tremor/react';
@@ -48,21 +49,21 @@ export default function SalesTotal({
   );
 
   return (
-    <div className="grid grid-cols-12 gap-4">
-      <div className="col-span-12">
-        <Card>
+    <Grid className="gap-6 h-full" numCols={12}>
+      <Col numColSpan={12}>
+        <Card className="h-full">
           <Title>Revenue</Title>
           <Subtitle>Year to Date</Subtitle>
           <Bold style={{ fontSize: 24 }}>{rpFormatter(salesTotal)}</Bold>
         </Card>
-      </div>
-      <div className="col-span-12">
-        <Card>
+      </Col>
+      <Col numColSpan={12}>
+        <Card className="h-full">
           <Title>Revenue</Title>
           <Subtitle>This Week</Subtitle>
           <Bold style={{ fontSize: 24 }}>{rpFormatter(weeklyTotal)}</Bold>
         </Card>
-      </div>
-    </div>
+      </Col>
+    </Grid>
   );
 }
