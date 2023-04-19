@@ -83,8 +83,6 @@ export default function PerformanceChart({
     return 0;
   });
 
-  console.log(chartData);
-
   return (
     <Card>
       <Title>Performance</Title>
