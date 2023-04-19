@@ -6,7 +6,7 @@ export type SaleData = Array<string>;
 
 interface Result {
   error: null | undefined | string;
-  values: null | undefined | Array<SaleData>;
+  values: Array<SaleData>;
 }
 
 export default async function getSalesData() {
@@ -19,7 +19,7 @@ export default async function getSalesData() {
   const isEmailAllowed = session?.user?.email
     ? allowedEmails.includes(session?.user?.email)
     : false;
-  const res: Result = { error: null, values: null };
+  const res: Result = { error: null, values: [] };
   if (isEmailAllowed) {
     // Signed in
     const auth = new google.auth.GoogleAuth({

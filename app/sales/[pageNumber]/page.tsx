@@ -6,6 +6,7 @@ import CustomersTable from '../../customersTable';
 import SalesTable from '../../salesTable';
 import Search from '../../search';
 import { Card, Title, Text } from '@tremor/react';
+import Select from '../../select';
 
 export const dynamic = 'force-dynamic',
   revalidate = 1800;
@@ -18,7 +19,7 @@ export default async function SalesPage({
   searchParams,
   params
 }: {
-  searchParams: { q: string };
+  searchParams: { customerId: string; productId: string };
   params: IParams;
 }) {
   const swag = params.pageNumber;
@@ -26,7 +27,20 @@ export default async function SalesPage({
   const { values: sales } = await getSalesData();
   const { values: products } = await getProductsData();
 
-  const salesData = sales?.map((sale) => {
+  const searchCustomerId = searchParams.customerId ?? 'all';
+  const searchProductId = searchParams.productId ?? 'all';
+
+  let salesData = sales;
+
+  if (searchCustomerId !== 'all') {
+    salesData = salesData.filter((sale) => sale[2] === searchCustomerId);
+  }
+
+  if (searchProductId !== 'all') {
+    salesData = salesData.filter((sale) => sale[3] === searchProductId);
+  }
+
+  salesData = salesData.map((sale) => {
     const customer = customers.find((cus) => cus[0] === sale[2]);
     const product = products.find((prod) => prod[0] === sale[3]);
     if (customer) {
@@ -48,17 +62,20 @@ export default async function SalesPage({
     return sale;
   });
 
-  const search = searchParams.q ?? '';
-
-  const filteredCustomers = customers.filter((cus) =>
-    cus[1].toLocaleLowerCase().includes(search.toLocaleLowerCase())
-  );
-
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <Title>Customers</Title>
       <Text>Rumah Sehat Customers</Text>
-      <Search />
+      <Select
+        options={customers.map((cus) => ({ value: cus[0], label: cus[1] }))}
+        paramName="customerId"
+        label="Filter by Customer"
+      />
+      <Select
+        options={products.map((prod) => ({ value: prod[0], label: prod[1] }))}
+        paramName="productId"
+        label="Filter by Product"
+      />
       {salesData && (
         <Card className="mt-6">
           <SalesTable sales={salesData} />
