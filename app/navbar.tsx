@@ -11,7 +11,8 @@ const navigation = [
   { name: 'Dashboard', href: '/' },
   // { name: 'Playground', href: '/playground' },
   { name: 'Customers', href: '/customers' },
-  { name: 'Products', href: '/products' }
+  { name: 'Products', href: '/products' },
+  { name: 'Sales', href: '/sales' }
 ];
 
 function classNames(...classes: string[]) {
