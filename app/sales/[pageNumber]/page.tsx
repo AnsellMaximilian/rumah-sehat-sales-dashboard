@@ -7,6 +7,8 @@ import SalesTable from '../../salesTable';
 import Search from '../../search';
 import { Card, Title, Text } from '@tremor/react';
 import Select from '../../select';
+import DateSelect from '../../dateSelect';
+import moment from 'moment';
 
 export const dynamic = 'force-dynamic',
   revalidate = 1800;
@@ -19,7 +21,12 @@ export default async function SalesPage({
   searchParams,
   params
 }: {
-  searchParams: { customerId: string; productId: string };
+  searchParams: {
+    customerId: string;
+    productId: string;
+    startDate: string;
+    endDate: string;
+  };
   params: IParams;
 }) {
   const swag = params.pageNumber;
@@ -29,6 +36,8 @@ export default async function SalesPage({
 
   const searchCustomerId = searchParams.customerId ?? 'all';
   const searchProductId = searchParams.productId ?? 'all';
+  const searchStartDate = searchParams.startDate ?? '';
+  const searchEndDate = searchParams.endDate ?? '';
 
   let salesData = sales;
 
@@ -38,6 +47,17 @@ export default async function SalesPage({
 
   if (searchProductId !== 'all') {
     salesData = salesData.filter((sale) => sale[3] === searchProductId);
+  }
+
+  if (searchStartDate) {
+    salesData = salesData.filter((sale) =>
+      moment(sale[1]).isSameOrAfter(moment(searchStartDate))
+    );
+  }
+  if (searchEndDate) {
+    salesData = salesData.filter((sale) =>
+      moment(sale[1]).isSameOrBefore(moment(searchEndDate))
+    );
   }
 
   salesData = salesData.map((sale) => {
@@ -76,6 +96,9 @@ export default async function SalesPage({
         paramName="productId"
         label="Filter by Product"
       />
+
+      <DateSelect paramName="startDate" label="Filter By Start Date" />
+      <DateSelect paramName="endDate" label="Filter By End Date" />
       {salesData && (
         <Card className="mt-6">
           <SalesTable sales={salesData} />
