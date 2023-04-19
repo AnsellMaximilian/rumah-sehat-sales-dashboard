@@ -29,7 +29,8 @@ export default async function SalesPage({
   };
   params: IParams;
 }) {
-  const swag = params.pageNumber;
+  const pageNumber = params.pageNumber ? params.pageNumber : '1';
+
   const { values: customers } = await getCustomersData();
   const { values: sales } = await getSalesData();
   const { values: products } = await getProductsData();
@@ -82,6 +83,23 @@ export default async function SalesPage({
     return sale;
   });
 
+  const pagination = [];
+
+  for (let i = 1; i <= Math.ceil(salesData.length / 50); i++) {
+    pagination.push(
+      <li key={i} className="">
+        <a
+          href={`/sales/${i}?${new URLSearchParams(searchParams).toString()}`}
+          className={`text-sm hover:underline hover:text-blue-500 ${
+            parseInt(pageNumber) === i ? 'text-blue-500' : ''
+          }`}
+        >
+          {i}
+        </a>
+      </li>
+    );
+  }
+
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <Title>Customers</Title>
@@ -100,9 +118,20 @@ export default async function SalesPage({
       <DateSelect paramName="startDate" label="Filter By Start Date" />
       <DateSelect paramName="endDate" label="Filter By End Date" />
       {salesData && (
-        <Card className="mt-6">
-          <SalesTable sales={salesData} />
-        </Card>
+        <>
+          <Card className="mt-6">
+            <SalesTable
+              sales={salesData.slice(
+                (parseInt(pageNumber) - 1) * 50,
+                50 * parseInt(pageNumber)
+              )}
+            />
+          </Card>
+          <Card className="mt-4">
+            Current Page: {pageNumber} / {Math.ceil(salesData.length / 50)}
+            <ul className="flex gap-2 overflow-x-scroll py-2">{pagination}</ul>
+          </Card>
+        </>
       )}
     </main>
   );

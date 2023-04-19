@@ -15,7 +15,7 @@ export default function SalesTable({ sales }: { sales: string[][] }) {
     <Table>
       <TableHead>
         <TableRow>
-          {/* <TableHeaderCell>ID</TableHeaderCell> */}
+          <TableHeaderCell>ID</TableHeaderCell>
           <TableHeaderCell>Date</TableHeaderCell>
           <TableHeaderCell>Customer</TableHeaderCell>
           <TableHeaderCell>Product</TableHeaderCell>
@@ -30,7 +30,7 @@ export default function SalesTable({ sales }: { sales: string[][] }) {
       <TableBody>
         {sales.map((sales) => (
           <TableRow key={sales[0]}>
-            {/* <TableCell>{sales[0]}</TableCell> */}
+            <TableCell>{sales[0]}</TableCell>
 
             <TableCell>{sales[1]}</TableCell>
             <TableCell>
