@@ -43,7 +43,10 @@ export default function Select({
       </label>
       <div className="rounded-md shadow-sm">
         <div className="flex items-end justify-between">
-          <label htmlFor="customer" className="text-sm text-gray-400">
+          <label
+            htmlFor="customer"
+            className="text-sm text-gray-400 block mb-2"
+          >
             {label}
           </label>
           {isPending && (

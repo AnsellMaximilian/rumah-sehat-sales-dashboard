@@ -41,7 +41,10 @@ export default function DateSelect({
       </label>
       <div className="rounded-md shadow-sm">
         <div className="flex items-end justify-between">
-          <label htmlFor={paramName} className="text-sm text-gray-400">
+          <label
+            htmlFor={paramName}
+            className="text-sm text-gray-400 block mb-2"
+          >
             {label}
           </label>
           {isPending && (
