@@ -35,7 +35,7 @@ export default function DateSelect({
   };
 
   return (
-    <div className="relative mt-5 max-w-md">
+    <div className="relative max-w-md">
       <label htmlFor="search" className="sr-only">
         Search Date
       </label>

@@ -102,21 +102,49 @@ export default async function SalesPage({
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Title>Customers</Title>
-      <Text>Rumah Sehat Customers</Text>
-      <Select
-        options={customers.map((cus) => ({ value: cus[0], label: cus[1] }))}
-        paramName="customerId"
-        label="Filter by Customer"
-      />
-      <Select
-        options={products.map((prod) => ({ value: prod[0], label: prod[1] }))}
-        paramName="productId"
-        label="Filter by Product"
-      />
-
-      <DateSelect paramName="startDate" label="Filter By Start Date" />
-      <DateSelect paramName="endDate" label="Filter By End Date" />
+      <Title>Sales</Title>
+      <Text>Rumah Sehat Product Sales</Text>
+      <div className="grid grid-cols-12 gap-4 mt-4">
+        <div className="col-span-12 md:col-span-6">
+          <Select
+            options={customers.map((cus) => ({ value: cus[0], label: cus[1] }))}
+            paramName="customerId"
+            label="Filter by Customer"
+          />
+        </div>
+        <div className="col-span-12 md:col-span-6">
+          <Select
+            options={products.map((prod) => ({
+              value: prod[0],
+              label: prod[1]
+            }))}
+            paramName="productId"
+            label="Filter by Product"
+          />
+        </div>
+        <div className="col-span-12 md:col-span-6">
+          <DateSelect paramName="startDate" label="Filter By Start Date" />
+        </div>
+        <div className="col-span-12 md:col-span-6">
+          <DateSelect paramName="endDate" label="Filter By End Date" />
+        </div>
+        <div className="col-span-6">
+          <button
+            className="w-full text-green-500 font-bold py-2 px-4 rounded focus:ring-offset-2 focus:ring-2 focus:ring-green-300 border-green-500 border bg-white hover:bg-gray-50"
+            type="button"
+          >
+            RESET FILTER
+          </button>
+        </div>
+        <div className="col-span-6">
+          <button
+            className="w-full bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded focus:ring-offset-2 focus:ring-2 focus:ring-green-300"
+            type="button"
+          >
+            THIS WEEK
+          </button>
+        </div>
+      </div>
       {salesData && (
         <>
           <Card className="mt-6">
