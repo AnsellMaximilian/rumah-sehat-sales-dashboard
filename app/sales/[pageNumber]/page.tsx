@@ -129,7 +129,7 @@ export default async function SalesPage({
           </Card>
           <Card className="mt-4">
             Current Page: {pageNumber} / {Math.ceil(salesData.length / 50)}
-            <ul className="flex gap-2 overflow-x-scroll py-2">{pagination}</ul>
+            <ul className="flex gap-2 overflow-x-auto py-2">{pagination}</ul>
           </Card>
         </>
       )}
