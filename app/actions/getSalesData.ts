@@ -11,6 +11,7 @@ interface Result {
 
 export default async function getSalesData() {
   const session = await getServerSession(authOptions);
+
   const isPublic = process.env.APP_MODE === 'public';
 
   const allowedEmails = JSON.parse(
