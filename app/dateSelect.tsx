@@ -39,7 +39,7 @@ export default function DateSelect({
       <label htmlFor="search" className="sr-only">
         Search Date
       </label>
-      <div className="rounded-md shadow-sm">
+      <div>
         <div className="flex items-end justify-between">
           <label
             htmlFor={paramName}
@@ -72,14 +72,16 @@ export default function DateSelect({
             </div>
           )}
         </div>
-        <input
-          type="date"
-          name={paramName}
-          id={paramName}
-          disabled={disabled}
-          className="h-10 block w-full rounded-md border border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          onChange={(e) => handleSetDate(e.target.value)}
-        />
+        <div className="relative">
+          <input
+            type="date"
+            name={paramName}
+            id={paramName}
+            disabled={disabled}
+            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            onChange={(e) => handleSetDate(e.target.value)}
+          />
+        </div>
       </div>
     </div>
   );
