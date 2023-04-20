@@ -12,12 +12,14 @@ export default function Select({
   disabled,
   options,
   paramName,
-  label
+  label,
+  defaultValue
 }: {
   disabled?: boolean;
   options: SelectOption[];
   paramName: string;
   label: string;
+  defaultValue: string;
 }) {
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -75,6 +77,7 @@ export default function Select({
           <select
             name="customer"
             id="customer"
+            defaultValue={defaultValue}
             disabled={disabled}
             onChange={(e) => handleSelect(e.target.value)}
             className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"

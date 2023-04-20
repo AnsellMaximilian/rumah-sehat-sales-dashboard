@@ -110,6 +110,7 @@ export default async function SalesPage({
             options={customers.map((cus) => ({ value: cus[0], label: cus[1] }))}
             paramName="customerId"
             label="Filter by Customer"
+            defaultValue={searchCustomerId}
           />
         </div>
         <div className="col-span-12 md:col-span-6">
@@ -120,13 +121,22 @@ export default async function SalesPage({
             }))}
             paramName="productId"
             label="Filter by Product"
+            defaultValue={searchProductId}
           />
         </div>
         <div className="col-span-12 md:col-span-6">
-          <DateSelect paramName="startDate" label="Filter By Start Date" />
+          <DateSelect
+            paramName="startDate"
+            label="Filter By Start Date"
+            defaultValue={searchStartDate}
+          />
         </div>
         <div className="col-span-12 md:col-span-6">
-          <DateSelect paramName="endDate" label="Filter By End Date" />
+          <DateSelect
+            paramName="endDate"
+            label="Filter By End Date"
+            defaultValue={searchEndDate}
+          />
         </div>
         <div className="col-span-6">
           <button

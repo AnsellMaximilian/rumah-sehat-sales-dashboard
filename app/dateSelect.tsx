@@ -11,11 +11,13 @@ interface SelectOption {
 export default function DateSelect({
   disabled,
   paramName,
-  label
+  label,
+  defaultValue
 }: {
   disabled?: boolean;
   paramName: string;
   label: string;
+  defaultValue: string;
 }) {
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -73,6 +75,7 @@ export default function DateSelect({
           <input
             type="date"
             name={paramName}
+            defaultValue={defaultValue}
             id={paramName}
             disabled={disabled}
             className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
