@@ -11,6 +11,7 @@ interface Result {
 
 export default async function getMetadata() {
   const session = await getServerSession(authOptions);
+  const isPublic = process.env.APP_MODE === 'public';
 
   const allowedEmails = JSON.parse(
     process.env.ALLOWED_EMAILS as string
@@ -20,7 +21,7 @@ export default async function getMetadata() {
     ? allowedEmails.includes(session?.user?.email)
     : false;
   const res: Result = { error: null, values: [] };
-  if (isEmailAllowed) {
+  if (isEmailAllowed || isPublic) {
     // Signed in
     const auth = new google.auth.GoogleAuth({
       credentials: JSON.parse(process.env.JSON_SECRET as string),
