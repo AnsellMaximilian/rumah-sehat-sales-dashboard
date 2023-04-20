@@ -6,13 +6,21 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
+import moment from 'moment';
 
 const navigation = [
   { name: 'Dashboard', href: '/' },
   // { name: 'Playground', href: '/playground' },
   { name: 'Customers', href: '/customers' },
   { name: 'Products', href: '/products' },
-  { name: 'Sales', href: '/sales' }
+  {
+    name: 'Sales',
+    href: `/sales/1?startDate=${moment()
+      .startOf('isoWeek')
+      .format('YYYY-MM-DD')}&endDate=${moment()
+      .endOf('isoWeek')
+      .format('YYYY-MM-DD')}`
+  }
 ];
 
 function classNames(...classes: string[]) {
