@@ -158,6 +158,17 @@ export default async function SalesPage({
       {salesData && (
         <>
           <Card className="mt-6">
+            <Title>Sales Data</Title>
+            <Text className="text-sm text-gray-400">
+              {searchStartDate
+                ? `From ${moment(searchStartDate).format('ddd, DD MMMM YYYY')}`
+                : ''}
+              {searchEndDate
+                ? `${searchStartDate ? ' to' : 'Up to'} ${moment(
+                    searchEndDate
+                  ).format('ddd, DD MMMM YYYY')}`
+                : ''}
+            </Text>
             <SalesTable
               sales={salesData.slice(
                 (parseInt(pageNumber) - 1) * 50,
