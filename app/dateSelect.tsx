@@ -40,11 +40,8 @@ export default function DateSelect({
         Search Date
       </label>
       <div>
-        <div className="flex items-end justify-between">
-          <label
-            htmlFor={paramName}
-            className="text-sm text-gray-400 block mb-2"
-          >
+        <div className="flex items-end justify-between mb-2">
+          <label htmlFor={paramName} className="text-sm text-gray-400 block">
             {label}
           </label>
           {isPending && (

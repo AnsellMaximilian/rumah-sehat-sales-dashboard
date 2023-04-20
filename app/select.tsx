@@ -42,11 +42,8 @@ export default function Select({
         Select
       </label>
       <div>
-        <div className="flex items-end justify-between">
-          <label
-            htmlFor="customer"
-            className="text-sm text-gray-400 block mb-2"
-          >
+        <div className="flex items-end justify-between mb-2">
+          <label htmlFor="customer" className="text-sm text-gray-400 block">
             {label}
           </label>
           {isPending && (
