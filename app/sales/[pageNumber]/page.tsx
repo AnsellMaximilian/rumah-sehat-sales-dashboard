@@ -5,7 +5,7 @@ import getSalesData from '../../actions/getSalesData';
 import CustomersTable from '../../customersTable';
 import SalesTable from '../../salesTable';
 import Search from '../../search';
-import { Card, Title, Text } from '@tremor/react';
+import { Card, Title, Text, Grid, Col, Metric } from '@tremor/react';
 import Select from '../../select';
 import DateSelect from '../../dateSelect';
 import moment from 'moment';
@@ -42,6 +42,9 @@ export default async function SalesPage({
 
   let salesData = sales;
 
+  const filteredCustomer = customers.find((cus) => cus[0] === searchCustomerId);
+  const filteredProduct = products.find((prod) => prod[0] === searchProductId);
+
   if (searchCustomerId !== 'all') {
     salesData = salesData.filter((sale) => sale[2] === searchCustomerId);
   }
@@ -74,12 +77,12 @@ export default async function SalesPage({
     const totalCost = parseFloat(sale[4]) * parseFloat(sale[6]);
     const totalSale = parseFloat(sale[5]) * parseFloat(sale[6]);
 
-    sale[4] = rpFormatter(parseFloat(sale[4]));
-    sale[5] = rpFormatter(parseFloat(sale[5]));
+    // sale[4] = rpFormatter(parseFloat(sale[4]));
+    // sale[5] = rpFormatter(parseFloat(sale[5]));
 
-    sale[7] = rpFormatter(totalCost);
-    sale[8] = rpFormatter(totalSale);
-    sale[9] = rpFormatter(totalSale - totalCost);
+    sale[7] = totalCost.toString();
+    sale[8] = totalSale.toString();
+    sale[9] = (totalSale - totalCost).toString();
     return sale;
   });
 
@@ -99,6 +102,34 @@ export default async function SalesPage({
       </li>
     );
   }
+
+  const getFilterLabel = () => {
+    return `${
+      searchStartDate
+        ? `From ${moment(searchStartDate).format('DD MMMM YYYY')}`
+        : ''
+    }${
+      searchEndDate
+        ? `${searchStartDate ? ' to' : 'Up to'} ${moment(searchEndDate).format(
+            'DD MMMM YYYY'
+          )}`
+        : ''
+    }${
+      filteredCustomer
+        ? `${searchStartDate || searchEndDate ? ` - by` : `By`}  ${
+            filteredCustomer[1]
+          }`
+        : ''
+    }${
+      filteredProduct
+        ? `${
+            searchStartDate || searchEndDate || filteredCustomer
+              ? ` -  buying`
+              : `Buying`
+          }  ${filteredProduct[1]}`
+        : ''
+    }`;
+  };
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
@@ -138,7 +169,7 @@ export default async function SalesPage({
             defaultValue={searchEndDate}
           />
         </div>
-        <div className="col-span-6">
+        {/* <div className="col-span-6">
           <button
             className="w-full text-green-500 font-bold py-2 px-4 rounded focus:ring-offset-2 focus:ring-2 focus:ring-green-300 border-green-500 border bg-white hover:bg-gray-50"
             type="button"
@@ -153,34 +184,51 @@ export default async function SalesPage({
           >
             THIS WEEK
           </button>
-        </div>
+        </div> */}
       </div>
       {salesData && (
-        <>
-          <Card className="mt-6">
-            <Title>Sales Data</Title>
-            <Text className="text-sm text-gray-400">
-              {searchStartDate
-                ? `From ${moment(searchStartDate).format('ddd, DD MMMM YYYY')}`
-                : ''}
-              {searchEndDate
-                ? `${searchStartDate ? ' to' : 'Up to'} ${moment(
-                    searchEndDate
-                  ).format('ddd, DD MMMM YYYY')}`
-                : ''}
-            </Text>
-            <SalesTable
-              sales={salesData.slice(
-                (parseInt(pageNumber) - 1) * 50,
-                50 * parseInt(pageNumber)
-              )}
-            />
-          </Card>
-          <Card className="mt-4">
-            Current Page: {pageNumber} / {Math.ceil(salesData.length / 50)}
-            <ul className="flex gap-2 overflow-x-auto py-2">{pagination}</ul>
-          </Card>
-        </>
+        <Grid className="gap-4 mt-6" numColsSm={12}>
+          <Col numColSpan={12} numColSpanMd={6}>
+            <Card className="h-full">
+              <Title>Revenue</Title>
+              <Text>{getFilterLabel()}</Text>
+              <Metric>
+                {rpFormatter(
+                  salesData.reduce((sum, sale) => sum + parseFloat(sale[8]), 0)
+                )}
+              </Metric>
+            </Card>
+          </Col>
+          <Col numColSpan={12} numColSpanMd={6}>
+            <Card className="h-full">
+              <Title>Profit</Title>
+              <Text>{getFilterLabel()}</Text>
+              <Metric>
+                {rpFormatter(
+                  salesData.reduce((sum, sale) => sum + parseFloat(sale[9]), 0)
+                )}
+              </Metric>
+            </Card>
+          </Col>
+          <Col numColSpan={12} numColSpanMd={12}>
+            <Card>
+              <Title>Sales Data</Title>
+              <Text className="text-sm text-gray-400">{getFilterLabel()}</Text>
+              <SalesTable
+                sales={salesData.slice(
+                  (parseInt(pageNumber) - 1) * 50,
+                  50 * parseInt(pageNumber)
+                )}
+              />
+            </Card>
+          </Col>
+          <Col numColSpan={12} numColSpanMd={12}>
+            <Card>
+              Current Page: {pageNumber} / {Math.ceil(salesData.length / 50)}
+              <ul className="flex gap-2 overflow-x-auto py-2">{pagination}</ul>
+            </Card>
+          </Col>
+        </Grid>
       )}
     </main>
   );

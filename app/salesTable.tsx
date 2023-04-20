@@ -9,6 +9,7 @@ import {
   TableCell,
   Text
 } from '@tremor/react';
+import { rpFormatter } from '../helpers/formatter';
 
 export default function SalesTable({ sales }: { sales: string[][] }) {
   return (
@@ -40,22 +41,22 @@ export default function SalesTable({ sales }: { sales: string[][] }) {
               <Text>{sales[3]}</Text>
             </TableCell>
             <TableCell>
-              <Text>{sales[4]}</Text>
+              <Text>{rpFormatter(parseFloat(sales[4]))}</Text>
             </TableCell>
             <TableCell>
-              <Text>{sales[5]}</Text>
+              <Text>{rpFormatter(parseFloat(sales[5]))}</Text>
             </TableCell>
             <TableCell>
               <Text>{sales[6]}</Text>
             </TableCell>
             <TableCell>
-              <Text>{sales[7]}</Text>
+              <Text>{rpFormatter(parseFloat(sales[7]))}</Text>
             </TableCell>
             <TableCell>
-              <Text>{sales[8]}</Text>
+              <Text>{rpFormatter(parseFloat(sales[8]))}</Text>
             </TableCell>
             <TableCell>
-              <Text>{sales[9]}</Text>
+              <Text>{rpFormatter(parseFloat(sales[9]))}</Text>
             </TableCell>
           </TableRow>
         ))}
